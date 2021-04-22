@@ -93,7 +93,7 @@ export default {
     return {
       token: null,
       success: false,
-      progress: true,
+      progress: false,
       progressValue: 25,
       form: {
         subject: '',

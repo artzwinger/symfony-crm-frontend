@@ -45,8 +45,8 @@ export default {
 
   env: {
     oro_protocol: 'http',
-    oro_host: 'oro.local:1080',
+    oro_host: '3.133.4.113',
     oro_account_email: 'Testcoursemanager1@gmail.com',
-    oro_account_api_key: '29e9b0576c75e12f5056a1aa5daaa62907deaadd'
+    oro_account_api_key: '2f8820c6e6906b9c634376dc4a5c2216ca4a1a58'
   }
 }
