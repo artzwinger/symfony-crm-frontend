@@ -289,6 +289,16 @@ export default {
   methods: {
     async onSubmit(event) {
       event.preventDefault()
+      try {
+        const token = await this.$recaptcha.execute('login')
+        console.log('ReCaptcha token:', token)
+
+        // send token to server alongside your form data
+
+      } catch (error) {
+        console.log('Login error:', error)
+        return
+      }
       this.progress = true;
       const tm = setTimeout(() => {
         this.progressValue = 50
@@ -354,8 +364,16 @@ export default {
       })
     }
   },
-  mounted() {
+  async mounted() {
     // this.getToken();
+    try {
+      await this.$recaptcha.init()
+    } catch (e) {
+      console.error(e);
+    }
+  },
+  beforeDestroy() {
+    this.$recaptcha.destroy()
   }
 }
 </script>

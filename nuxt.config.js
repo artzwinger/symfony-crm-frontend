@@ -37,8 +37,14 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     '@nuxtjs/axios',
+    '@nuxtjs/recaptcha',
     'bootstrap-vue/nuxt',
   ],
+
+  recaptcha: {
+    "siteKey": process.env.RECAPTCHA_SITE_KEY || "6Lfr5scaAAAAAP8OsZO_ONmhNB3pCHphJNl0iWok",
+    "version": 3
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
