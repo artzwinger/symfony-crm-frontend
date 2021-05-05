@@ -73,7 +73,7 @@
         ></b-form-input>
       </b-form-group>
 
-      <!-- Name of Courses -->
+      <!-- Course Name -->
       <b-form-group
         id="input-group-course-name"
         label="Name of Course(s):"
@@ -245,7 +245,7 @@ export default {
       progress: false,
       progressValue: 25,
       form: {
-        term: 'short',
+        term: 'long',
         firstName: '',
         lastName: '',
         email: '',
