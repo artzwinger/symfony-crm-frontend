@@ -320,7 +320,7 @@ export default {
               "workToday": this.form.workToday,
               "dueDate": this.form.dueDate,
               "courseUrl": this.form.courseUrl,
-              "userId": this.form.userId,
+              "userLogin": this.form.userId,
               "userPassword": this.form.userPassword,
               "instructions": this.form.instructions,
             },
