@@ -362,7 +362,8 @@ export default {
       return ({
         'Authorization': `WSSE profile="UsernameToken"`,
         'X-WSSE': (await this.getToken()).getWSSEHeader({nonceBase64: true}),
-        'Content-Type': 'application/vnd.api+json'
+        'Content-Type': 'application/vnd.api+json',
+        'X-Forwarded-Host': location.host,
       })
     }
   },
