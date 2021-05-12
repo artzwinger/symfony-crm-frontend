@@ -12,7 +12,12 @@ import Vue from 'vue'
 import LongTermForm from "~/components/LongTermForm.vue";
 
 export default Vue.extend({
-  components: {LongTermForm}
+  components: {LongTermForm},
+  head() {
+    return {
+      title: 'Long term sign up',
+    }
+  }
 })
 </script>
 

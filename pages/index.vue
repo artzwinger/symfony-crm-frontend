@@ -35,9 +35,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({})
+export default {
+  head() {
+    return {
+      title: 'Sign up for tutoring package',
+    }
+  }
+}
 </script>
 
 <style lang="scss">

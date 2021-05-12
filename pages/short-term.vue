@@ -12,6 +12,11 @@ import Vue from 'vue'
 import ShortTermForm from "~/components/ShortTermForm.vue";
 
 export default Vue.extend({
-  components: {ShortTermForm}
+  components: {ShortTermForm},
+  head() {
+    return {
+      title: 'Short term sign up',
+    }
+  }
 })
 </script>
