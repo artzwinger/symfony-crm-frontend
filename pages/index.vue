@@ -26,7 +26,7 @@
         <div class="sign-up-container">
           <span>Make a Payment</span>
           <div class="sign-up-link-container">
-            <a href="#">Make a payment</a>
+            <a href="#" onclick="alert('Sincerely apologies, at this moment you cannot make payments in this demo version.')">Make a payment</a>
           </div>
         </div>
       </div>
