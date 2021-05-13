@@ -169,7 +169,7 @@
         <b-form-input
           id="input-course-url"
           v-model="form.courseUrl"
-          type="url"
+          type="text"
           placeholder="Enter Course URL"
           required
         ></b-form-input>
