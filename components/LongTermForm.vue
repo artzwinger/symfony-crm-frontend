@@ -353,7 +353,7 @@ export default {
       }
       this.token = wsse({
         username: process.env.oro_account_email,
-        password: process.env.oro_account_api_key,
+        password: process.env.oro_account_api_key
       })
       return this.token
     },
