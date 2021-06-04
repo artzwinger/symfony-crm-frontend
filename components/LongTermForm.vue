@@ -279,7 +279,7 @@ export default {
         },
         {
           text: 'No',
-          value: 'false'
+          value: '0'
         },
       ],
       minDatetime: Date.now().toString(),
