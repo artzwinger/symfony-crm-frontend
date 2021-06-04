@@ -254,7 +254,7 @@ export default {
         coursePrefixes: '',
         description: '',
         price: 0.0,
-        workToday: '',
+        workToday: 'false',
         dueDate: null,
         courseUrl: '',
         userId: '',
@@ -279,7 +279,7 @@ export default {
         },
         {
           text: 'No',
-          value: '0'
+          value: 'false'
         },
       ],
       minDatetime: Date.now().toString(),

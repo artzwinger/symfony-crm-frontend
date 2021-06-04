@@ -3,7 +3,7 @@
     <div class="sign-up-image-container">
       <div class="container flex-column align-items-start">
         <span class="red-heading">Sign up for your</span>
-        <span class="blue-heading">Onliner tutoring package</span>
+        <span class="blue-heading">Online tutoring package</span>
       </div>
     </div>
     <div class="container flex-column">
