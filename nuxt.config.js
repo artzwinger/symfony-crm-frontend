@@ -51,8 +51,8 @@ export default {
   },
 
   env: {
-    oro_protocol: 'http',
-    oro_host: '3.133.4.113',
+    oro_protocol: 'https',
+    oro_host: 'staging.ochsignup.com',
     oro_account_email: process.env.oro_account_email || 'Testcoursemanager1@gmail.com',
     oro_account_api_key: process.env.oro_account_api_key || '2f8820c6e6906b9c634376dc4a5c2216ca4a1a58'
   }
