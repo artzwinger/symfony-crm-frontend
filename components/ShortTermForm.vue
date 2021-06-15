@@ -1,7 +1,5 @@
 <template>
   <div>
-    <b-progress :value="progressValue" variant="info" v-if="progress" class="mt-2"></b-progress>
-    <div class="badge-success" v-if="success">Application successfully sent</div>
     <b-form @submit="onSubmit" v-if="show">
       <!-- Term -->
       <b-form-group id="input-group-term" label="Length of Class Help:" label-for="input-term">
@@ -12,99 +10,91 @@
           required
         ></b-form-select>
       </b-form-group>
-
-      <!-- First name -->
-      <b-form-group
-        id="input-group-first-name"
-        label="First Name:"
-        label-for="input-first-name"
-      >
-        <b-form-input
-          id="input-first-name"
-          v-model="form.firstName"
-          type="text"
-          placeholder="Enter your first name"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <!-- Last name -->
-      <b-form-group
-        id="input-group-last-name"
-        label="Last Name:"
-        label-for="input-last-name"
-      >
-        <b-form-input
-          id="input-last-name"
-          v-model="form.lastName"
-          type="text"
-          placeholder="Enter your last name"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <!-- Email -->
-      <b-form-group
-        id="input-group-email"
-        label="Email:"
-        label-for="input-email"
-      >
-        <b-form-input
-          id="input-email"
-          v-model="form.email"
-          type="email"
-          placeholder="Enter your email"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <!-- Phone number -->
-      <b-form-group
-        id="input-group-phone"
-        label="Phone Number:"
-        label-for="input-phone"
-      >
-        <b-form-input
-          id="input-phone"
-          v-model="form.phone"
-          type="tel"
-          placeholder="Enter your phone"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <!-- Name of Courses -->
-      <b-form-group
-        id="input-group-course-name"
-        label="Name of Course(s):"
-        label-for="input-course-name"
-      >
-        <b-form-input
-          id="input-course-name"
-          v-model="form.courseName"
-          type="text"
-          placeholder="Enter Course Name(s)"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <!-- Course Prefixes -->
-      <b-form-group
-        id="input-group-course-prefixes"
-        label="Course Prefixes:"
-        label-for="input-course-prefixes"
-      >
-        <b-form-input
-          id="input-course-prefixes"
-          v-model="form.coursePrefixes"
-          type="text"
-          placeholder="Enter Course Prefixes"
-          required
-        ></b-form-input>
-      </b-form-group>
-
+      <b-form-row>
+        <b-col>
+          <b-form-group
+            id="input-group-first-name"
+          >
+            <b-form-input
+              id="input-first-name"
+              v-model="form.firstName"
+              type="text"
+              placeholder="First Name"
+              required
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col>
+          <b-form-group
+            id="input-group-last-name"
+          >
+            <b-form-input
+              id="input-last-name"
+              v-model="form.lastName"
+              type="text"
+              placeholder="Last Name"
+              required
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-form-row>
+      <b-form-row>
+        <b-col>
+          <b-form-group
+            id="input-group-email"
+          >
+            <b-form-input
+              id="input-email"
+              v-model="form.email"
+              type="email"
+              placeholder="Email"
+              required
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col>
+          <b-form-group
+            id="input-group-phone"
+          >
+            <cleave
+              v-model="form.phone"
+              :options="cleavePhoneOptions"
+              model-value="form.phone"
+            ></cleave>
+          </b-form-group>
+        </b-col>
+      </b-form-row>
+      <b-form-row>
+        <b-col>
+          <b-form-group
+            id="input-group-course-name"
+          >
+            <b-form-input
+              id="input-course-name"
+              v-model="form.courseName"
+              type="text"
+              placeholder="Enter Course Name(s)"
+              required
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col>
+          <b-form-group
+            id="input-group-course-prefixes"
+          >
+            <b-form-input
+              id="input-course-prefixes"
+              v-model="form.coursePrefixes"
+              type="text"
+              placeholder="Enter Course Prefixes"
+              required
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-form-row>
       <!-- Description -->
-      <b-form-group id="input-group-description" label="What are we helping you with? Be as specific as possible:" label-for="input-description">
+      <b-form-group id="input-group-description" label="What are we helping you with? Be as specific as possible:"
+                    label-for="input-description">
         <b-form-textarea
           id="input-description"
           v-model="form.description"
@@ -112,23 +102,23 @@
           required
         ></b-form-textarea>
       </b-form-group>
-
       <!-- Price -->
       <b-form-group
         id="input-group-price"
         label="Total Price:"
         label-for="input-price"
-        description="Price that you want the lessons to be in United States Dollars ($)"
       >
-        <b-form-input
-          id="input-price"
-          v-model="form.price"
-          type="number"
-          min="0.00"
-          step="0.05"
-          placeholder="Enter price"
-          required
-        ></b-form-input>
+        <b-input-group prepend="$">
+          <b-form-input
+            id="input-price"
+            v-model="form.price"
+            type="number"
+            min="0.00"
+            step="0.05"
+            placeholder="Enter price"
+            required
+          ></b-form-input>
+        </b-input-group>
       </b-form-group>
 
       <!-- Work today -->
@@ -176,37 +166,41 @@
       </b-form-group>
 
       <!-- User ID -->
-      <b-form-group
-        id="input-group-user-id"
-        label="User ID:"
-        label-for="input-user-id"
-      >
-        <b-form-input
-          id="input-user-id"
-          v-model="form.userId"
-          type="text"
-          placeholder="Enter User Login"
-          required
-        ></b-form-input>
-      </b-form-group>
-
-      <!-- User Password -->
-      <b-form-group
-        id="input-group-user-password"
-        label="Password:"
-        label-for="input-user-password"
-      >
-        <b-form-input
-          id="input-user-password"
-          v-model="form.userPassword"
-          type="text"
-          placeholder="Enter User Password"
-          required
-        ></b-form-input>
-      </b-form-group>
-
+      <b-form-row>
+        <b-col>
+          <b-form-group
+            id="input-group-user-id"
+            label="User ID:"
+            label-for="input-user-id"
+          >
+            <b-form-input
+              id="input-user-id"
+              v-model="form.userId"
+              type="text"
+              placeholder="Enter User Login"
+              required
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+        <b-col>
+          <b-form-group
+            id="input-group-user-password"
+            label="Password:"
+            label-for="input-user-password"
+          >
+            <b-form-input
+              id="input-user-password"
+              v-model="form.userPassword"
+              type="text"
+              placeholder="Enter User Password"
+              required
+            ></b-form-input>
+          </b-form-group>
+        </b-col>
+      </b-form-row>
       <!-- Instructions -->
-      <b-form-group id="input-group-instructions" label="Instructions, Comments or Requests" label-for="input-instructions">
+      <b-form-group id="input-group-instructions" label="Instructions, Comments or Requests"
+                    label-for="input-instructions">
         <b-form-textarea
           id="input-instructions"
           v-model="form.instructions"
@@ -221,11 +215,16 @@
           id="checkboxes-agreement"
           :aria-describedby="ariaDescribedby"
         >
-          <b-form-checkbox value="agree">Agree to process my personal data</b-form-checkbox>
+          <b-form-checkbox value="agree">
+            I agree with the
+            <nuxt-link to="terms-and-conditions">terms and conditions</nuxt-link>
+            and the
+            <nuxt-link to="privacy-policy">privacy policy</nuxt-link>
+          </b-form-checkbox>
         </b-form-checkbox-group>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button class="btn-primary btn-lg btn-block" type="submit" variant="primary">SEND</b-button>
     </b-form>
   </div>
 </template>
@@ -233,17 +232,21 @@
 <script>
 import wsse from "wsse";
 import {Datetime} from 'vue-datetime';
+import Cleave from "~/components/Cleave";
+import "cleave.js/dist/addons/cleave-phone.us.js"
 
 export default {
   components: {
-    datetime: Datetime
+    datetime: Datetime,
+    cleave: Cleave
   },
   data() {
     return {
+      cleavePhoneOptions: {
+        phone: true,
+        phoneRegionCode: 'US',
+      },
       token: null,
-      success: false,
-      progress: false,
-      progressValue: 25,
       form: {
         term: 'short',
         firstName: '',
@@ -288,6 +291,7 @@ export default {
   },
   methods: {
     async onSubmit(event) {
+      this.$nuxt.$loading.start();
       event.preventDefault()
       let token = null;
       try {
@@ -300,10 +304,6 @@ export default {
         console.log('Login error:', error)
         throw error
       }
-      this.progress = true;
-      const tm = setTimeout(() => {
-        this.progressValue = 50
-      }, 500);
       await this.$axios.$post(`${process.env.oro_protocol}://${process.env.oro_host}/api/applications`, {
         "data":
           {
@@ -342,9 +342,8 @@ export default {
             }
           }
       }, {headers: await this.getHeaders()})
-      clearTimeout(tm);
-      this.success = true;
-      this.progress = false;
+      this.$nuxt.$loading.finish();
+      await this.$router.push('success');
     },
 
     async getToken() {
@@ -379,3 +378,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.btn-primary {
+  background: #f75845;
+  border-color: #f75845;
+
+  &:hover {
+    background: #293b61;
+    border-color: #293b61;
+  }
+}
+</style>

@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="sign-up-image-container">
-      <div class="container flex-column align-items-start">
+      <div class="container index-container flex-column align-items-start">
         <span class="red-heading">Sign up for your</span>
         <span class="blue-heading">Online tutoring package</span>
       </div>
     </div>
-    <div class="container flex-column">
+    <div class="container index-container flex-column">
       <h2 class="forms-title">
         Sign Up For Your Online Tutoring Package
       </h2>
@@ -105,7 +105,7 @@ export default {
   }
 }
 
-.container {
+.index-container {
   margin: 0 auto;
   min-height: auto;
   align-items: center;
