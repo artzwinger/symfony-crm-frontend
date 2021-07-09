@@ -101,6 +101,20 @@
         required
       ></b-form-textarea>
     </b-form-group>
+    <!-- Amount Due Today -->
+    <b-form-group
+      id="input-group-amount-due-today"
+      label="Amount Due Today:"
+      label-for="input-amount-due-today"
+    >
+      <b-input-group prepend="$">
+        <cleave
+          v-model="form.amountDueToday"
+          :options="cleaveMoneyOptions"
+          placeholder="Amount that you can pay due today"
+        ></cleave>
+      </b-input-group>
+    </b-form-group>
     <!-- Price -->
     <b-form-group
       id="input-group-price"
@@ -108,15 +122,11 @@
       label-for="input-price"
     >
       <b-input-group prepend="$">
-        <b-form-input
-          id="input-price"
+        <cleave
           v-model="form.price"
-          type="number"
-          min="0.00"
-          step="0.05"
-          placeholder="Enter price"
-          required
-        ></b-form-input>
+          :options="cleaveMoneyOptions"
+          placeholder="Total price"
+        ></cleave>
       </b-input-group>
     </b-form-group>
 
@@ -259,6 +269,10 @@ export default {
         phone: true,
         phoneRegionCode: 'US',
       },
+      cleaveMoneyOptions: {
+        numeral: true,
+        numeralThousandsGroupStyle: 'thousand'
+      },
       token: null,
       file: null,
       fileBase64: '',
@@ -272,6 +286,7 @@ export default {
         courseName: '',
         coursePrefixes: '',
         description: '',
+        amountDueToday: '',
         price: 0.0,
         workToday: 'no',
         dueDate: null,
@@ -364,6 +379,8 @@ export default {
         console.log('Login error:', error)
         throw error
       }
+      const price = this.form.price.split(',').join('')
+      const amountDueToday = this.form.amountDueToday.split(',').join('')
       return {
         "data": {
           "type": "applications",
@@ -376,7 +393,8 @@ export default {
             "courseName": this.form.courseName,
             "coursePrefixes": this.form.coursePrefixes,
             "description": this.form.description,
-            "price": this.form.price,
+            "price": price,
+            "amountDueToday": amountDueToday,
             "workToday": this.form.workToday,
             "dueDate": this.form.dueDate,
             "courseUrl": this.form.courseUrl,

@@ -4,7 +4,7 @@
          v-on:input="onInput"
          ref="root"
          required
-         placeholder="Phone, e.g. 412 123 4567"
+         :placeholder="placeholder"
          class="form-control"
          type="text">
 </template>
@@ -14,9 +14,13 @@ import Cleave from 'cleave.js'
 export default {
   name: 'cleave',
   props: {
+    placeholder: {
+      type: String,
+      default: () => 'Phone, e.g. 412 123 4567'
+    },
     modelValue: {
       default: null,
-      required: true,
+      required: false,
       validator(value) {
         return value === null || typeof value === 'string' || value instanceof String || typeof value === 'number'
       }
