@@ -228,9 +228,9 @@
       >
         <b-form-checkbox value="agree">
           I agree with the
-          <nuxt-link to="terms-and-conditions">terms and conditions</nuxt-link>
+          <a href="#" v-on:click="onTermsLinkClick">terms and conditions</a>
           and the
-          <nuxt-link to="privacy-policy">privacy policy</nuxt-link>
+          <a href="#" v-on:click="onPrivacyLinkClick">privacy policy</a>
         </b-form-checkbox>
       </b-form-checkbox-group>
     </b-form-group>
@@ -311,6 +311,14 @@ export default {
     }
   },
   methods: {
+    onTermsLinkClick(e) {
+      this.$nuxt.$emit('terms-modal-trigger')
+      e.preventDefault()
+    },
+    onPrivacyLinkClick(e) {
+      this.$nuxt.$emit('privacy-modal-trigger')
+      e.preventDefault()
+    },
     async onSubmit(event) {
       event.preventDefault()
       this.$nuxt.$loading.start();

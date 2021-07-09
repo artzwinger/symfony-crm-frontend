@@ -1,20 +1,36 @@
 <template>
   <div>
-    <Nuxt />
+    <b-modal ref="privacy_policy_modal">
+      <PrivacyPolicyContent/>
+    </b-modal>
+    <b-modal ref="terms_and_conds_modal">
+      <TermsAndConditionsContent/>
+    </b-modal>
+    <Nuxt/>
   </div>
 </template>
+<script>
+import PrivacyPolicyContent from "~/components/PrivacyPolicyContent";
+import TermsAndConditionsContent from "~/components/TermsAndConditionsContent";
 
+export default {
+  components: {TermsAndConditionsContent, PrivacyPolicyContent},
+  created() {
+    this.$nuxt.$on('privacy-modal-trigger', () => this.$refs.privacy_policy_modal.show())
+    this.$nuxt.$on('terms-modal-trigger', () => this.$refs.terms_and_conds_modal.show())
+  }
+}
+</script>
 <style>
 html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: 'Source Sans Pro',
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  'Helvetica Neue',
+  Arial,
+  sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -23,6 +39,7 @@ html {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
+
 *,
 *::before,
 *::after {
