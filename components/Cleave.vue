@@ -78,11 +78,11 @@ export default {
         this.onValueChangedFn.call(this, event)
       }
     },
-    onBlur(event) {
+    onBlur() {
       this.$emit('blur', this.modelValue)
     },
-    onInput(e) {
-      this.$emit('input', this.cleave ? this.cleave.properties.result : this.modelValue)
+    onInput() {
+      setTimeout(() => this.$emit('input', this.cleave ? this.cleave.properties.result : this.modelValue))
     },
   },
   watch: {
