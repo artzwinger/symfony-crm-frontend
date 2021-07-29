@@ -111,7 +111,7 @@
         <cleave
           v-model="form.amountDueToday"
           :options="cleaveMoneyOptions"
-          placeholder="Amount that you can pay due today"
+          placeholder="Amount Due Today"
         ></cleave>
       </b-input-group>
     </b-form-group>
@@ -286,7 +286,7 @@ export default {
         courseName: '',
         coursePrefixes: '',
         description: '',
-        amountDueToday: '',
+        amountDueToday: 0.0,
         price: 0.0,
         workToday: 'no',
         dueDate: null,
