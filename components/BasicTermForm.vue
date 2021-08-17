@@ -401,7 +401,8 @@ export default {
             "userLogin": this.form.userId,
             "userPassword": this.form.userPassword,
             "instructions": this.form.instructions,
-            "reCaptchaToken": token
+            "reCaptchaToken": token,
+            "rep": "sales"
           },
           "relationships": {
             "status": {
