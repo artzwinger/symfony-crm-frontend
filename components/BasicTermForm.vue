@@ -401,14 +401,19 @@ export default {
             "userLogin": this.form.userId,
             "userPassword": this.form.userPassword,
             "instructions": this.form.instructions,
-            "reCaptchaToken": token,
-            "rep": "sales"
+            "reCaptchaToken": token
           },
           "relationships": {
             "status": {
               "data": {
                 "type": "applicationstatuses",
                 "id": "new"
+              }
+            },
+            "rep": {
+              "data": {
+                "type": "applicationreps",
+                "id": "sales"
               }
             },
             "term": {
