@@ -4,7 +4,7 @@
       <h1 class="display-4" style="color: #f75845">THANK YOU!</h1>
       <p class="lead">We work on your request.</p>
       <hr>
-      <p>Having trouble? <nuxt-link to="contact">Contact Us</nuxt-link></p>
+      <p>Having trouble? <a href="mailto:sales@onlineclasshelp.com">Contact Us</a></p>
       <p class="lead">
         <nuxt-link class="btn btn-primary btn-sm" role="button" to="/">Continue to homepage</nuxt-link>
       </p>
