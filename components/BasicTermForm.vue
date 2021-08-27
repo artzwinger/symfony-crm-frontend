@@ -208,7 +208,7 @@
       </b-col>
     </b-form-row>
     <!-- Instructions -->
-    <b-form-group id="input-group-instructions" label="Instructions, Comments or Requests"
+    <b-form-group id="input-group-instructions" :label="instructionsLabel"
                   label-for="input-instructions">
       <b-form-textarea
         id="input-instructions"
@@ -261,7 +261,11 @@ export default {
     cleave: Cleave
   },
   props: {
-    term: ''
+    term: '',
+    instructionsLabel: {
+      type: String,
+      default: 'Instructions, Comments or Requests'
+    }
   },
   data() {
     return {

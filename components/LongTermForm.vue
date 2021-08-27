@@ -1,5 +1,5 @@
 <template>
-  <basic-term-form term="long"></basic-term-form>
+  <basic-term-form term="long" instructionsLabel="Instructions, Comments, Due Dates, or Requests"></basic-term-form>
 </template>
 
 <script>
