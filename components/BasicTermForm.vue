@@ -55,11 +55,11 @@
         <b-form-group
           id="input-group-phone"
         >
-          <cleave
+          <cleave-phone
             v-model="form.phone"
             :options="cleavePhoneOptions"
             model-value="form.phone"
-          ></cleave>
+          ></cleave-phone>
         </b-form-group>
       </b-col>
     </b-form-row>
@@ -111,9 +111,13 @@
         <cleave
           v-model="form.amountDueToday"
           :options="cleaveMoneyOptions"
+          :state="amountDueTodayLessThanTotal"
           placeholder="Amount Due Today"
         ></cleave>
       </b-input-group>
+      <b-form-invalid-feedback :state="amountDueTodayLessThanTotal">
+        Amount Due Today must be less than the total amount.
+      </b-form-invalid-feedback>
     </b-form-group>
     <!-- Price -->
     <b-form-group
@@ -123,6 +127,7 @@
     >
       <b-input-group prepend="$">
         <cleave
+          :state="null"
           v-model="form.price"
           :options="cleaveMoneyOptions"
           placeholder="Total price"
@@ -245,7 +250,7 @@
       </b-form-checkbox-group>
     </b-form-group>
 
-    <b-button class="btn-primary btn-lg btn-block" type="submit" variant="primary">SEND</b-button>
+    <b-button :disabled="!formValid" class="btn-primary btn-lg btn-block" type="submit" variant="primary">SEND</b-button>
   </b-form>
 </template>
 
@@ -253,12 +258,14 @@
 import wsse from "wsse";
 import {Datetime} from 'vue-datetime';
 import Cleave from "~/components/Cleave";
+import CleavePhone from "~/components/CleavePhone";
 import "cleave.js/dist/addons/cleave-phone.us.js"
 
 export default {
   components: {
     datetime: Datetime,
-    cleave: Cleave
+    cleave: Cleave,
+    cleavePhone: CleavePhone
   },
   props: {
     term: '',
@@ -321,7 +328,24 @@ export default {
         },
       ],
       minDatetime: Date.now().toString(),
-      show: true
+      show: true,
+    }
+  },
+  computed: {
+    price() {
+      return this.form.price ? parseFloat(this.form.price.split(',').join('')) : 0;
+    },
+    amountDueToday() {
+      return this.form.amountDueToday ? parseFloat(this.form.amountDueToday.split(',').join('')) : 0;
+    },
+    amountDueTodayLessThanTotal() {
+      if (this.amountDueToday === 0) {
+        return null;
+      }
+      return this.amountDueToday < this.price;
+    },
+    formValid() {
+      return this.amountDueTodayLessThanTotal;
     }
   },
   watch: {
@@ -383,8 +407,6 @@ export default {
         console.log('Login error:', error)
         throw error
       }
-      const price = this.form.price.split(',').join('')
-      const amountDueToday = this.form.amountDueToday.split(',').join('')
       return {
         "data": {
           "type": "applications",
@@ -397,8 +419,8 @@ export default {
             "courseName": this.form.courseName,
             "coursePrefixes": this.form.coursePrefixes,
             "description": this.form.description,
-            "price": price,
-            "amountDueToday": amountDueToday,
+            "price": this.price,
+            "amountDueToday": this.amountDueToday,
             "workToday": this.form.workToday,
             "dueDate": this.form.dueDate,
             "courseUrl": this.form.courseUrl,

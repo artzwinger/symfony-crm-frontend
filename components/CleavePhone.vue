@@ -1,13 +1,12 @@
 <template>
-  <b-form-input :value="this.cleave ? this.cleave.properties.result : this.modelValue"
+  <input :value="this.cleave ? this.cleave.properties.result : this.modelValue"
                 v-on:blur="onBlur"
                 v-on:input="onInput"
                 ref="root"
                 required
                 :placeholder="placeholder"
-                :state="state"
                 class="form-control"
-                type="text"></b-form-input>
+                type="text">
 </template>
 <script>
 import Cleave from 'cleave.js'
@@ -36,10 +35,6 @@ export default {
       type: Boolean,
       default: true
     },
-    state: {
-      type: Boolean,
-      default: true
-    },
   },
   data() {
     return {
@@ -53,7 +48,7 @@ export default {
     /* istanbul ignore if */
     if (this.cleave) return;
 
-    this.cleave = new Cleave(this.$refs.root.$el, this.getOptions(this.options));
+    this.cleave = new Cleave(this.$refs.root, this.getOptions(this.options));
   },
   methods: {
     /**
@@ -100,7 +95,7 @@ export default {
       deep: true,
       handler(newOptions) {
         this.cleave.destroy();
-        this.cleave = new Cleave(this.$refs.root.$el, this.getOptions(newOptions));
+        this.cleave = new Cleave(this.$refs.root, this.getOptions(newOptions));
         this.cleave.setRawValue(this.modelValue)
       }
     },
@@ -117,7 +112,7 @@ export default {
       // when v-model is not masked (raw)
       if (this.raw && newValue === this.cleave.getRawValue()) return;
       //  when v-model is masked (NOT raw)
-      if (!this.raw && newValue === this.$refs.root.$el.value) return;
+      if (!this.raw && newValue === this.$refs.root.value) return;
       // Lastly set newValue
       this.cleave.setRawValue(newValue);
     }
