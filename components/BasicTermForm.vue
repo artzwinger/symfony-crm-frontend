@@ -145,24 +145,16 @@
       ></b-form-select>
     </b-form-group>
 
-    <!-- Due date time -->
-    <b-form-group id="input-group-due-date-time" label="Due Date and Time" label-for="input-due-date-time">
-      <datetime
-        type="datetime"
-        v-model="form.dueDate"
-        input-id="input-due-date-time"
-        input-class="form-control"
-        value-zone="America/New_York"
-        :format="{ year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }"
-        :phrases="{ok: 'Continue', cancel: 'Exit'}"
-        :hour-step="1"
-        :minute-step="10"
-        :min-datetime="minDatetime"
-        :week-start="7"
-        use12-hour
-        auto
-      ></datetime>
-    </b-form-group>
+    <!-- Due date time: only short-term form -->
+    <slot name="single-due-date-input"
+          v-bind:min-datetime="minDatetime"
+          v-bind:set-due-date="setDueDate"></slot>
+    <!-- Class Start/End date fields: only long-term form -->
+    <slot name="class-start-end-date-inputs"
+          v-bind:min-datetime="minDatetime"
+          v-bind:set-class-start-date="setClassStartDate"
+          v-bind:set-class-end-date="setClassEndDate"
+    ></slot>
 
     <!-- Course URL -->
     <b-form-group
@@ -256,14 +248,12 @@
 
 <script>
 import wsse from "wsse";
-import {Datetime} from 'vue-datetime';
 import Cleave from "~/components/Cleave";
 import CleavePhone from "~/components/CleavePhone";
 import "cleave.js/dist/addons/cleave-phone.us.js"
 
 export default {
   components: {
-    datetime: Datetime,
     cleave: Cleave,
     cleavePhone: CleavePhone
   },
@@ -301,6 +291,7 @@ export default {
         price: 0.0,
         workToday: 'no',
         dueDate: null,
+        classStartDate: null,
         courseUrl: '',
         userId: '',
         userPassword: '',
@@ -354,6 +345,15 @@ export default {
     }
   },
   methods: {
+    setDueDate(val) {
+      this.form.dueDate = val
+    },
+    setClassStartDate(val) {
+      this.form.classStartDate = val
+    },
+    setClassEndDate(val) {
+      this.form.dueDate = val
+    },
     onTermsLinkClick(e) {
       this.$nuxt.$emit('terms-modal-trigger')
       e.preventDefault()
@@ -378,6 +378,7 @@ export default {
           }
         }
       }
+      console.log(applicationCreateData)
       await this.$axios.$post(applicationCreateUrl, applicationCreateData, {headers: await this.getHeaders()})
       this.$nuxt.$loading.finish();
       await this.$router.push('success');
@@ -423,6 +424,7 @@ export default {
             "amountDueToday": this.amountDueToday,
             "workToday": this.form.workToday,
             "dueDate": this.form.dueDate,
+            "classStartDate": this.form.classStartDate,
             "courseUrl": this.form.courseUrl,
             "userLogin": this.form.userId,
             "userPassword": this.form.userPassword,
