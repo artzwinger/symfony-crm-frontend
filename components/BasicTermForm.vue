@@ -111,12 +111,12 @@
         <cleave
           v-model="form.amountDueToday"
           :options="cleaveMoneyOptions"
-          :state="amountDueTodayLessThanTotal"
+          :state="amountDueTodayLessThanOrEqualToTotal"
           placeholder="Amount Due Today"
         ></cleave>
       </b-input-group>
-      <b-form-invalid-feedback :state="amountDueTodayLessThanTotal">
-        Amount Due Today must be less than the total amount.
+      <b-form-invalid-feedback :state="amountDueTodayLessThanOrEqualToTotal">
+        Amount Due Today must be less than or equal to the total amount due.
       </b-form-invalid-feedback>
     </b-form-group>
     <!-- Price -->
@@ -329,14 +329,14 @@ export default {
     amountDueToday() {
       return this.form.amountDueToday ? parseFloat(this.form.amountDueToday.split(',').join('')) : 0;
     },
-    amountDueTodayLessThanTotal() {
+    amountDueTodayLessThanOrEqualToTotal() {
       if (this.amountDueToday === 0) {
         return null;
       }
-      return this.amountDueToday < this.price;
+      return this.amountDueToday <= this.price;
     },
     formValid() {
-      return this.amountDueTodayLessThanTotal;
+      return this.amountDueTodayLessThanOrEqualToTotal;
     }
   },
   watch: {
