@@ -1,7 +1,7 @@
 <template>
   <b-form @submit="onSubmit" v-if="show">
     <!-- Term -->
-    <b-form-group id="input-group-term" label="Length of Class Help:" label-for="input-term">
+    <b-form-group id="input-group-term" label="Length of Class Help:" label-for="input-term" class="d-none">
       <b-form-select
         id="input-term"
         v-model="form.term"
