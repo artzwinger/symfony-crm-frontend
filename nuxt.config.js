@@ -34,6 +34,10 @@ export default {
     '@nuxt/typescript-build',
   ],
 
+  router: {
+    base: '/'
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
