@@ -382,7 +382,7 @@ export default {
       console.log(applicationCreateData)
       await this.$axios.$post(applicationCreateUrl, applicationCreateData, {headers: await this.getHeaders()})
       this.$nuxt.$loading.finish();
-      await this.$router.push('success');
+      await this.$router.push('/success');
     },
 
     async uploadFile() {
