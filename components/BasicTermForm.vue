@@ -336,7 +336,8 @@ export default {
       return this.amountDueToday <= this.price;
     },
     formValid() {
-      return this.amountDueTodayLessThanOrEqualToTotal;
+      const valid = this.amountDueTodayLessThanOrEqualToTotal;
+      return null === valid || valid;
     }
   },
   watch: {
