@@ -489,6 +489,8 @@ export default {
       const t = this.fileReader.result.split(',')
       this.fileBase64 = t[t.length - 1]
     }, false)
+
+    console.log(this.$recaptcha.siteKey)
   },
   beforeDestroy() {
     this.$recaptcha.destroy()
