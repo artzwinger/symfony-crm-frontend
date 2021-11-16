@@ -184,7 +184,6 @@
             v-model="form.userId"
             type="text"
             placeholder="Enter User Login"
-            required
           ></b-form-input>
         </b-form-group>
       </b-col>
@@ -199,7 +198,6 @@
             v-model="form.userPassword"
             type="text"
             placeholder="Enter User Password"
-            required
           ></b-form-input>
         </b-form-group>
       </b-col>
